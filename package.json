@@ -9,7 +9,8 @@
     "test": "npm run test:validate && npm run test:unit && npm run test:features",
     "test:features": "npm run local-webserver & (wdio wdio.BUILD.conf.js; wdio_ret=$?; forever stopall; exit $wdio_ret)",
     "test:unit": "jest --config=jest.json",
-    "test:validate": "eslint 'src/**/*.js' 'test/**/*.js!(setup.js)'"
+    "test:validate": "eslint 'src/**/*.js' 'test/**/*.js!(setup.js)'",
+    "start": "yarn run wdio ./e2e/wdio.dev.conf.js"
   },
   "repository": {
     "type": "git",
