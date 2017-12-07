@@ -1,48 +1,33 @@
-Cucumber Boilerplate
-====================
+## Lykke Exchange Web End-2-End Tests
 
-[![Build Status](https://travis-ci.org/webdriverio/cucumber-boilerplate.svg?branch=master)](https://travis-ci.org/webdriverio/cucumber-boilerplate) [![Dependency Status](https://www.versioneye.com/user/projects/58932d83b166b5004053c63c/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58932d83b166b5004053c63c) [![Code Climate](https://codeclimate.com/github/webdriverio/cucumber-boilerplate/badges/gpa.svg)](https://codeclimate.com/github/webdriverio/cucumber-boilerplate) [![Test Coverage](https://codeclimate.com/github/webdriverio/cucumber-boilerplate/badges/coverage.svg)](https://codeclimate.com/github/webdriverio/cucumber-boilerplate/coverage)
+End-to-end tests for the Lykke Exchange Web written in Cucumber JS.
+Based on [Cucumber Boilerplate](https://github.com/webdriverio/cucumber-boilerplate).
 
-***
+- [Getting started](#getting-started)
+  - [yarn](#yarn)
+  - [yarn start](#yarn-start)
+  - [yarn test](#yarn-test)
+- [How to write a test](#how-to-write-a-test)
+  - [Using tags](#using-tags)
+  - [Pending test](#pending-test)
+  - [Adding new steps and snippets](#adding-new-steps-and-snippets)
+  - [Comments](#comments)
+- [List of predefined steps](#list-of-predefined-steps)
+  - [Given steps](#given-steps)
+  - [When steps](#when-steps)
+  - [Then steps](#then-steps)
 
-Boilerplate project to run WebdriverIO tests with [Cucumber](https://cucumber.io/) and brings **true** [BDD](http://en.wikipedia.org/wiki/Behavior-driven_development) to JavaScript. Instead of writing complicated test code that only developers can understand, Cucumber maps an ordinary language to code and allows to start with the test process in the early stages of your product development.
+#### `yarn`
 
-## Requirements
+Installs dependencies.
 
-- Node version 4.8 or higher
+#### `yarn start`
 
-Although this project works fine with NPM we recommend to use Yarn (>= 1.0.0) instead,  due to its speed & solid dependency locking mechanism. To keep things simple we use yarn in this guide, but feel free to replace this with NPM if that is what you are using.
+Run Lykke BDD end-to-end features on local dev server (port 3000).
 
-## Quick start
+#### `yarn test`
 
-Choose one of the following options:
-
-1. Download the latest stable release [here](https://github.com/webdriverio/cucumber-boilerplate/archive/master.zip) or clone the git repo — `git clone https://github.com/webdriverio/cucumber-boilerplate.git`
-
-2. Then:
-- Copy the files to your project into a directory like `/integrationtests` (note the hidden files!)
-
-3. Clean the project (Optional):
-- *On OSX/Linux:*
--- Run `yarn run clean`
-
-- *On Windows:*
--- Remove the directories `/.git`, `/.github`, `/demo-app` & `/test`
--- Remove the files `.travis.yml`, `jest.json` & `wdio.BUILD.conf.js`
--- Remove all the demo features from the `/src/features` directory
-
-4. Install the dependencies (`yarn install`)
-
-Now you are ready to write your own features.
-
-## Features
-
-- Super simple setup
-- Full integration with [WebdriverIO](http://webdriver.io/)
-- Over 150 predefined steps that cover almost everything you need, you can start writing tests right away
-- Easy integration with cloud services like [Sauce Labs](https://saucelabs.com/)
-- Integration of WebdriverIO's Multiremote functionality
-- Easy to run tests in parallel
+Launches the Cucumber Boilerplate framework tests.
 
 # How to write a test
 
@@ -52,85 +37,7 @@ that means that you write down what's supposed to happen in a real language. All
 directory. They should demonstrate, how tests could look like. Just create a new file and write your first
 test.
 
-__myFirstTest.feature__
-```gherkin
-Feature:
-    In order to keep my product stable
-    As a developer or product manager
-    I want to make sure that everything works as expected
-
-Scenario: Check title of website after search
-    Given I open the url "http://google.com"
-    When I set "WebdriverIO" to the inputfield "#gbqfq"
-    And I press "Enter"
-    Then I expect that the title is "WebdriverIO - Google Search"
-
-Scenario: Another test
-    Given ...
-
-```
-
-This test opens the browser and navigates them to google.com to check if the title contains the search
-query after doing a search. As you can see, it is pretty simple and understandable for everyone.
-
-# How to run the test
-
-Start the local web server:
-
-```sh
-$ yarn run local-webserver
-```
-
-To run your tests just call the [WDIO runner](http://webdriver.io/guide/testrunner/gettingstarted.html):
-
-```sh
-$ yarn run wdio
-```
-
-_please note_ The WDIO runner uses the configuration file `wdio.conf.js` by default.
-
-# Configurations
-
-To configure your tests, checkout the [`wdio.conf.js`](https://github.com/webdriverio/cucumber-boilerplate/blob/master/wdio.conf.js) file in your test directory. It comes with a bunch of documented options you can choose from.
-
-## Environment-specific configurations
-
-You can setup multiple configs for specific environments. Let's say you want to have a different `baseUrl` for
-your local and pre-deploy tests. Use the `wdio.conf.js` to set all general configs (like mochaOpts) that don't change.
-They act as default values. For each different environment you can create a new config with the following name
-scheme:
-
-```txt
-wdio.<ENVIRONMENT>.conf.js
-```
-
-Now you can create a specific config for your pre-deploy tests:
-
-__wdio.STAGING.conf.js__
-```js
-var config = require('./wdio.conf.js').config;
-
-config.baseUrl = 'http://staging.example.com'
-
-exports.config = config;
-```
-
-Your environment-specific config file will get merged into the default config file and overwrites the values you set.
-To run a test in a specific environment just add the desired configuration file as the first parameter:
-
-```sh
-$ yarn run wdio wdio.STAGING.conf.js
-```
-
-# Running single feature
-Sometimes its useful to only execute a single feature file, to do so use the following command:
-
-```sh
-$ yarn run wdio -- --spec ./test/features/select.feature
-```
-
-
-# Using tags
+## Using tags
 
 If you want to run only specific tests you can mark your features with tags. These tags will be placed before each feature like so:
 
@@ -147,7 +54,7 @@ $ yarn run wdio -- --cucumberOpts.tagExpression=@Tag,@AnotherTag
 
 You can add multiple tags separated by a comma
 
-# Pending test
+## Pending test
 
 If you have failing or unimplemented tests you can mark them as "Pending" so they will get skipped.
 
@@ -161,7 +68,7 @@ Feature: ...
 Scenario: ...
 ```
 
-# Adding new steps and snippets
+## Adding new steps and snippets
 
 The predefined snippets allow you to do a lot of common things but you might need extra snippets which
 are better aligned with your aims. To do so you will find all step definitions in `./src/steps`. They
@@ -174,7 +81,7 @@ You can access the browser and your WebdriverIO instance with `browser`.
 
 To assert values this boilerplate project comes with a [Chai](http://chaijs.com/) integration.
 
-# Comments
+## Comments
 
 You can add additional descriptive comments in your feature files.
 
