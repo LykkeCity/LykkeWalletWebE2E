@@ -38,3 +38,14 @@ Scenario: login with valid credentials
     When I press "Enter"
     When I pause for 3000ms
     Then I expect that the path is "/wallets/trading"
+
+Scenario: logout and return to login page
+    Given I open the url "/"
+    Then I pause for 3000ms
+    And I expect the url to contain "/wallets/"
+    When I move to element ".header_login__title"
+    And I pause for 1000ms
+    Then I expect that element "body" contains the text "Sign out"
+    When I click on the link "Sign out"
+    And I pause for 1000ms
+    Then I expect that the path is "/login"
